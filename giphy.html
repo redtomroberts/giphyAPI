@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Planet Earth</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+  <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+</head>
+
+<body style='background-color: #494949'>
+    <div class='container'>
+    <br>        
+    <!-- Jumbotron -->
+        <div class='jumbotron' style='background-color: #3a3a3a'>
+            <h1 class='greeting'><u>BULLSHIT YOUR WORK DAY AWAY!</u></h1>
+            <div id='bullshitButtons'>
+                <button data-animals='dog' class='btn btn-danger btn-lg'>CANIDAE</button>
+                <button data-animals='cat' class='btn btn-danger btn-lg'>FELIDAE</button>
+                <button data-animals='ferret' class='btn btn-danger btn-lg'>MUSTELIDAE</button>
+                <button data-animals='hampster' class='btn btn-danger btn-lg'>CRICETIDAE</button>
+                <button data-animals='tortoise' class='btn btn-danger btn-lg'>TESTUDINIDAE</button>
+                <button data-animals='goldfish' class='btn btn-danger btn-lg'>CYPRINIDAE</button>
+                <button data-animals='rabbit' class='btn btn-danger btn-lg'>LEPORIDAE</button>
+                <button data-animals='parakeet' class='btn btn-danger btn-lg'>PSITTACIDAE</button>
+                <button data-animals='squirrel' class='btn btn-danger btn-lg'>SCIURIDAE</button>
+                <button data-animals='dragon' class='btn btn-danger btn-lg'>VARANIDAE</button>
+                <button data-animals='david attenborough' class='btn btn-danger btn-lg'>DAVINIDAE</button>
+            </div>
+            <form id='animal-form'>
+              <label for='animal-input'>ADD AN ANIMAL!</label>
+              <br>
+              <input type='text' id='animal-input'>
+              <br>
+              <input id='add-animal' type='sumbit' value='GO!' class='btn btn-danger btn-lg'>
+            </form>
+        </div>
+    <!-- GIF Container -->
+    <div class='box'>
+        <h3>HOW ARE YOU STILL EMPLOYED?</h3>
+        <br>
+        <div class='giphy'>
+        </div>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript'>
+    // Event listener for all button elements
+      $('button').on('click', function() {
+      // In this case, the "this" keyword refers to the button that was clicked
+      var animals = $(this).attr('data-animals');
+      // Constructing a URL to search Giphy for the name of the person who said the quote
+      var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' +
+        animals + '&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10';
+
+      // Performing our AJAX GET request
+      $.ajax({
+        url: queryURL,
+        method: 'GET'
+      })
+        // After the data comes back from the API
+        .then(function(response) {
+          // Storing an array of results in the results variable
+          var results = response.data;
+
+          // Looping over every result item
+          for (var i = 0; i < results.length; i++) {
+            if (results[i].rating <= 'r') {
+              // Creating a div for the gif
+              var gifDiv = $('.giphy');
+
+              // Storing the result item's rating
+              var rating = results[i].rating;
+
+              // Creating a paragraph tag with the result item's rating
+              var p = $('<p>').text('Rating: ' + rating);
+                gifDiv.prepend(p);
+
+              // Creating an image tag
+              var animalImage = $('<img>');
+              gifDiv.prepend(animalImage);
+
+              $('.giphy').append(gifDiv);
+
+              // Giving the image tag an src attribute of a proprty pulled off the
+              // result item
+              animalImage.attr('src', results[i].images.fixed_height.url);
+
+            }
+          }
+        });
+    });
+  </script>
+</body>
+
+</html>
