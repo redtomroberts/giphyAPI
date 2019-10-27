@@ -1,0 +1,44 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.jumbotron {
+}
+
+.box {
+    text-align: center;
+    justify-content: center;
+    color: white;
+    background-color: #494949;
+}
+
+.btn {
+    margin: 10px;
+}
+
+
+#animal-form {
+    text-align: center;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+.greeting {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#bullshitButtons {
+    text-align: center;
+    margin: 10px;
+}
+
+.giphy {
+    /* solution from Michael B. on Stack Overflow -- https://stackoverflow.com/questions/37502266/how-do-i-create-a-3x3-grid-via-css */
+    display: flex;  /* Establish flex container */
+    flex-wrap: wrap;  /* Enable flex items to wrap */
+    align-items: stretch;
+    align-content: space-between;
+}
