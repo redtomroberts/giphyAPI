@@ -2,7 +2,13 @@
     box-sizing: border-box;
 }
 
-.jumbotron {
+a:link {
+    color: white;
+}
+
+a:hover {
+    color: white;
+    text-shadow: 0px 0px 8px yellow;
 }
 
 .box {
@@ -16,6 +22,10 @@
     margin: 10px;
 }
 
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 8px yellow;
+}
 
 #animal-form {
     text-align: center;
@@ -36,9 +46,17 @@
 }
 
 .giphy {
-    /* solution from Michael B. on Stack Overflow -- https://stackoverflow.com/questions/37502266/how-do-i-create-a-3x3-grid-via-css */
+    /* Spacing solution from Michael B. on Stack Overflow -- https://stackoverflow.com/questions/37502266/how-do-i-create-a-3x3-grid-via-css */
     display: flex;  /* Establish flex container */
     flex-wrap: wrap;  /* Enable flex items to wrap */
-    align-items: stretch;
-    align-content: space-between;
+    justify-content: space-evenly;
+}
+
+img {
+    margin: 10px;
+}
+
+img:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 8px yellow;
 }

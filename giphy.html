@@ -10,10 +10,12 @@
 
 <body style='background-color: #494949'>
     <div class='container'>
-    <br>        
-    <!-- Jumbotron -->
+    <br>
+
+    <!-- Jumbotron to contain the greeting, buttons, request form & request button -->
+
         <div class='jumbotron' style='background-color: #3a3a3a'>
-            <h1 class='greeting'><u>BULLSHIT YOUR WORK DAY AWAY!</u></h1>
+            <h1 class='greeting'><u>CHOOSE A FAMILY</u></h1>
             <div id='bullshitButtons'>
                 <button data-animals='dog' class='btn btn-danger btn-lg'>CANIDAE</button>
                 <button data-animals='cat' class='btn btn-danger btn-lg'>FELIDAE</button>
@@ -35,61 +37,66 @@
               <input id='add-animal' type='sumbit' value='GO!' class='btn btn-danger btn-lg'>
             </form>
         </div>
-    <!-- GIF Container -->
+
+    <!-- GIF Container for the GET request to place results -->
+
     <div class='box'>
-        <h3>HOW ARE YOU STILL EMPLOYED?</h3>
-        <br>
-        <div class='giphy'>
-        </div>
+      <a href='https://www.bbc.co.uk/programmes/b006mywy'><h3>EXPLORE</h3></a>
+      <br>
+      <div class='giphy'>
+      </div>
     </div>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script type='text/javascript'>
-    // Event listener for all button elements
+
+      // Event listener for all button elements
       $('button').on('click', function() {
-      // In this case, the "this" keyword refers to the button that was clicked
-      var animals = $(this).attr('data-animals');
-      // Constructing a URL to search Giphy for the name of the person who said the quote
-      var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' +
+
+      let animals = $(this).attr('data-animals');
+
+      // URL with API key to search for selected animal
+      let queryURL = 'https://api.giphy.com/v1/gifs/search?q=' +
         animals + '&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10';
 
-      // Performing our AJAX GET request
+      // AJAX GET request
       $.ajax({
         url: queryURL,
         method: 'GET'
       })
-        // After the data comes back from the API
-        .then(function(response) {
-          // Storing an array of results in the results variable
-          var results = response.data;
 
-          // Looping over every result item
-          for (var i = 0; i < results.length; i++) {
+        .then(function(response) {
+
+          // Stores an array of results in the results variable
+          let results = response.data;
+
+          // Loops over every result item
+          for (let i = 0; i < results.length; i++) {
+            // Alows for results 'less than or equal to' of rating 'r' to display
             if (results[i].rating <= 'r') {
-              // Creating a div for the gif
-              var gifDiv = $('.giphy');
+
+              // Storing variable to corresponding HTML div
+              let gifDiv = $('.giphy');
 
               // Storing the result item's rating
-              var rating = results[i].rating;
+              let rating = results[i].rating;
 
-              // Creating a paragraph tag with the result item's rating
-              var p = $('<p>').text('Rating: ' + rating);
+              // Creates an paragraph tag for the rating
+              let p = $('<p>').text('Rating: ' + rating);
                 gifDiv.prepend(p);
 
-              // Creating an image tag
-              var animalImage = $('<img>');
+              // Creates an image tag
+              let animalImage = $('<img>');
               gifDiv.prepend(animalImage);
-
               $('.giphy').append(gifDiv);
 
               // Giving the image tag an src attribute of a proprty pulled off the
               // result item
               animalImage.attr('src', results[i].images.fixed_height.url);
-
             }
           }
-        });
-    });
+        })
+      }) 
   </script>
 </body>
 
